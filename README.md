@@ -41,7 +41,7 @@ graph TD
 
 ## 💻 Kode Program
 
-Pastikan kamu sudah menginstal `scikit-learn` sebelum menjalankan kode ini. Kamu bisa menginstalnya dengan perintah `pip install scikit-learn`.
+Pastikan sudah menginstal `scikit-learn` sebelum menjalankan program ini. instalnya dengan perintah `pip install scikit-learn`.
 
 ```python
 # Import libraries

@@ -147,7 +147,6 @@ Pastikan *environment* Python Anda sudah memiliki pustaka berikut:
 pip install numpy matplotlib scikit-learn
 ```
 Setelah itu, cukup jalankan skrip Python, dan hasil evaluasi beserta grafiknya akan langsung muncul di layar.
-```
 
 # Hasil Ujicoba atau Test terhadap BBCA Stock Movement Prediction using Support Vector Machine (SVM)
 

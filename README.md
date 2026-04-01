@@ -82,6 +82,73 @@ print(class_report)
 
 Saat program dijalankan, model akan mengeluarkan metrik evaluasi berupa tingkat akurasi (dalam persen), *confusion matrix* untuk melihat detail tebakan per kelas, dan *classification report* yang memuat *precision, recall,* dan *f1-score*.
 
+# Klasifikasi Dataset Non-Linear (Make Moons) menggunakan Support Vector Machine (SVM)
+
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine_Learning-orange)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Data_Visualization-green)
+
+## 📌 Deskripsi Proyek
+Proyek ini adalah demonstrasi fundamental dari kekuatan algoritma **Support Vector Machine (SVM)** saat menangani dataset yang tidak dapat dipisahkan secara linear (*non-linear dataset*). 
+
+Kita menggunakan dataset sintetik bawaan scikit-learn yaitu `make_moons`, yang menghasilkan dua kelas data berbentuk bulan sabit yang saling bersinggungan. Melalui proyek ini, kita membuktikan bahwa menggunakan SVM dengan **Kernel RBF (Radial Basis Function)** memungkinkan model untuk meliukkan batas keputusannya (*decision boundary*) dan mengklasifikasikan data dengan akurasi tinggi, sesuatu yang tidak bisa dilakukan oleh model linear biasa.
+
+## 🔄 Pipeline Machine Learning
+
+Berikut adalah visualisasi alur kerja program dari awal hingga akhir:
+
+```mermaid
+graph TD
+    A([1. Generate Data]) -->|make_moons| B[Dataset 2D Non-Linear]
+    B --> C[2. Visualisasi Data Mentah]
+    
+    B --> D[3. Train-Test Split]
+    D -->|70% Latih, 30% Uji| E[4. Feature Scaling]
+    
+    E -->|StandardScaler| F(Data Terskalakan)
+    
+    F --> G[5. Train Model]
+    G -->|SVC Kernel='rbf'| H{Model Terlatih}
+    
+    H --> I[6. Prediksi & Evaluasi]
+    I -->|Output Terminal| J[Accuracy & Confusion Matrix]
+    
+    H --> K[7. Visualisasi Decision Boundary]
+    K -->|Meshgrid & Contourf| L[Grafik Batas Keputusan]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style H fill:#ff9,stroke:#333,stroke-width:2px
+    style E fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+## 🛠️ Penjelasan Alur Program (Step-by-Step)
+
+Program ini dibagi menjadi 8 tahapan logis:
+
+1. **Pembuatan Data (Generate Data):** Menggunakan fungsi `make_moons` untuk membuat 300 sampel data dua dimensi (Feature 1 dan Feature 2) yang dibagi menjadi dua kelas (Kelas 0 dan Kelas 1). Parameter `noise=0.2` ditambahkan agar data sedikit acak dan lebih realistis.
+2. **Visualisasi Awal:** Menampilkan titik-titik data mentah menggunakan `matplotlib` untuk melihat bentuk "bulan sabit" dari dataset sebelum diproses.
+3. **Pemisahan Data (Train-Test Split):** Memecah data dengan rasio 70:30. 70% data digunakan untuk melatih model, dan 30% sisanya disembunyikan untuk menguji performa model nanti.
+4. **Normalisasi Skala (Feature Scaling):** Menggunakan `StandardScaler`. Ini adalah **langkah krusial** untuk algoritma SVM karena SVM beroperasi berdasarkan perhitungan jarak antar titik. Jika skala antar fitur berbeda jauh, model akan bias.
+5. **Pelatihan Model (Training):** Menginisialisasi dan melatih model SVM menggunakan **Kernel RBF** (`kernel='rbf'`). Parameter `C=1.0` mengatur keseimbangan margin toleransi, dan `gamma='scale'` mengatur radius pengaruh dari setiap titik data latih.
+6. **Prediksi:** Model menebak kelas dari data uji (30% data yang disembunyikan tadi) yang telah dinormalisasi.
+7. **Evaluasi Metrik:** Menghitung skor numerik kinerja model, menghasilkan keluaran berupa persentase *Accuracy*, *Confusion Matrix* (untuk melihat detail benar/salah tebak per kelas), dan *Classification Report*.
+8. **Plotting Decision Boundary:** Tahap visualisasi akhir. Program membuat sebuah *grid* buatan yang menyelimuti seluruh area grafik, melakukan normalisasi skala pada *grid* tersebut, lalu menyuruh model memprediksi setiap titik di dalam *grid*. Hasilnya adalah grafik kontur (*contour plot*) berwarna yang menunjukkan area kekuasaan Kelas 0 (biru/merah) dan area kekuasaan Kelas 1.
+
+## 📊 Interpretasi Hasil Visual
+
+Saat program dijalankan, Anda akan melihat dua buah grafik:
+* **Grafik Pertama:** Menunjukkan titik merah dan titik biru yang saling melengkung layaknya logo *yin-yang*. Titik-titik ini tidak bisa dipisahkan hanya dengan menarik satu garis lurus.
+* **Grafik Kedua:** Menunjukkan latar belakang yang telah diwarnai oleh model (Area Keputusan). Anda akan melihat batas warna tersebut berhasil "meliuk" mengikuti kontur data yang berbentuk bulan sabit. Ini adalah bukti visual dari cara kerja dimensi tinggi (matematika ruang Hilbert) yang dioperasikan oleh Kernel RBF.
+
+## 🚀 Cara Menjalankan Program
+
+Pastikan *environment* Python Anda sudah memiliki pustaka berikut:
+```bash
+pip install numpy matplotlib scikit-learn
+```
+Setelah itu, cukup jalankan skrip Python, dan hasil evaluasi beserta grafiknya akan langsung muncul di layar.
+```
+
 # Hasil Ujicoba atau Test terhadap BBCA Stock Movement Prediction using Support Vector Machine (SVM)
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
